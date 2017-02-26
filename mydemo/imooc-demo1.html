@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>imooc-demo1</title>
+	<script src="build/react.js"></script>
+	<script src="build/react-dom.js"></script>
+	<script src="build/browser.min.js"></script>
+</head>
+<body>
+	<div id="example"></div>
+	<script type="text/babel">
+		var Hello = React.createClass({
+			getInitialState: function() {
+				alert('init');
+				return {
+					opacity: 1.0,
+					fontSize: '12px'
+				};
+			},
+			render: function() {
+				return (
+					<div style={{opacity: this.state.opacity, fontSize: this.state.fontSize}}>Hello {this.props.name}</div>
+				);
+			},
+			componentWillMount: function() {
+				alert('will');
+			},
+			componentDidMount: function() {
+				alert('did');
+
+				var self = this;
+				var timer =setInterval(function() {
+					self.setState({
+						opacity : 0.5,
+						fontSize: '44px'
+					})
+				}.bind(this),1000);
+			}
+		});
+
+		ReactDOM.render(
+			<Hello name='world' />,
+			document.getElementById('example')
+		);
+	</script>	
+</body>
+</html>
